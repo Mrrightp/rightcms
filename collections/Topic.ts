@@ -4,14 +4,11 @@ import formatSlug from "../utilities/formatSlug";
 import { Image, Type as ImageType } from "../blocks/Image";
 import { CallToAction, Type as CallToActionType } from "../blocks/CallToAction";
 import { Content, Type as ContentType } from "../blocks/Content";
-
-export type Layout = CallToActionType | ContentType | ImageType;
-
+import meta from "../fields/meta";
 export type Type = {
   title: string;
   slug: string;
   image?: MediaType;
-  layout: Layout[];
   meta: {
     title?: string;
     description?: string;
@@ -19,18 +16,18 @@ export type Type = {
   };
 };
 
-export const Page: CollectionConfig = {
-  slug: "pages",
+export const Topic: CollectionConfig = {
+  slug: "topics",
   admin: {
     useAsTitle: "title",
   },
   access: {
-    read: (): boolean => true, // Everyone can read Pages
+    read: (): boolean => true, // Everyone can read Topics
   },
   fields: [
     {
       name: "title",
-      label: "Page Title",
+      label: "Topic Title",
       type: "text",
       required: true,
     },
@@ -41,37 +38,47 @@ export const Page: CollectionConfig = {
       relationTo: "media",
     },
     {
-      name: "layout",
-      label: "Page Layout",
-      type: "blocks",
-      minRows: 1,
-      blocks: [CallToAction, Content, Image],
+      name: "content",
+      label: "Topic content",
+      type: "richText",
+      required: true,
     },
     {
-      name: "meta",
-      label: "Page Meta",
-      type: "group",
-      fields: [
-        {
-          name: "title",
-          label: "Title",
-          type: "text",
-        },
-        {
-          name: "description",
-          label: "Description",
-          type: "textarea",
-        },
-        {
-          name: "keywords",
-          label: "Keywords",
-          type: "text",
-        },
-      ],
+      name: "author",
+      type: "relationship",
+      relationTo: "users",
+      hasMany: false,
+      required: true,
     },
+    {
+      name: "category",
+      type: "relationship",
+      relationTo: "categories",
+      hasMany: false,
+      required: true,
+    },
+    {
+      name: "viwes",
+      label: "Viwes Count",
+      type: "number",
+      defaultValue: 0,
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: "likes",
+      label: "Likes Count",
+      type: "number",
+      defaultValue: 0,
+      admin: {
+        readOnly: true,
+      },
+    },
+
     {
       name: "slug",
-      label: "Page Slug",
+      label: "Topic Slug",
       type: "text",
       admin: {
         position: "sidebar",
@@ -80,7 +87,8 @@ export const Page: CollectionConfig = {
         beforeValidate: [formatSlug("title")],
       },
     },
+    meta,
   ],
 };
 
-export default Page;
+export default Topic;

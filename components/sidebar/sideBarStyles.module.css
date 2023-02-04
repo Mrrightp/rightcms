@@ -1,0 +1,7 @@
+.rightsidebar {
+  @media only screen (max-width: 768px) {
+    display: hidden;
+    background: black;
+  }
+  background-color: blue;
+}
