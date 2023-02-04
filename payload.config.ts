@@ -4,7 +4,6 @@ import Page from "./collections/Page";
 import Media from "./collections/Media";
 import Topic from "./collections/Topic";
 import Category from "./collections/category";
-import Student from "./collections/student";
 import Users from "./collections/Users";
 
 dotenv.config();
