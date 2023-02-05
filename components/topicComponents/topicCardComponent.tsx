@@ -18,12 +18,21 @@ export default function TopicCardComponent({ topic }: Props) {
   return (
     <div className="flex  justify-between space-x-2 border-b border-Gray h-fit py-2 px-1 topiccard">
       <div className="relative mt-3 w-[60px] h-[60px] pt-1">
-        <Image
-          src={topic.author.profileImage.url}
-          alt="jjj"
-          className="rounded-lg absolute object-cover topic-card-avatar"
-          fill
-        />
+        {topic.author.profileImage ? (
+          <Image
+            src={topic.author.profileImage.url}
+            alt="jjj"
+            className="rounded-lg absolute object-cover topic-card-avatar"
+            fill
+          />
+        ) : (
+          <Image
+            src={"/images/dprofile.jpg"}
+            alt="jjj"
+            className="rounded-lg absolute object-cover topic-card-avatar"
+            fill
+          />
+        )}
       </div>
       <div className="w-full mt-4 flex flex-col  ">
         <div className="flex w-full  justify-between">

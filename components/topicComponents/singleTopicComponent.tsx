@@ -110,12 +110,21 @@ export default function SingleTopic({ topic }: SingleTopicProps) {
         <div className="pb-[70px] px-2">
           <div className="flex border-[#000] text-lg whitespace-nowrap pt-2 space-x-2 pb-1">
             <div className="relative w-[66px] h-[55px] ">
-              <Image
-                src={topic.author.profileImage.url}
-                fill
-                alt="avatar"
-                className="rounded-lg object-cover absolute"
-              />
+              {topic.author.profileImage ? (
+                <Image
+                  src={topic.author.profileImage.url}
+                  fill
+                  alt="avatar"
+                  className="rounded-lg object-cover absolute"
+                />
+              ) : (
+                <Image
+                  src={"/images/dprofile.jpg"}
+                  fill
+                  alt="avatar"
+                  className="rounded-lg object-cover absolute"
+                />
+              )}
             </div>
             <div className="flex items-center space-y-3 w-full space-x-1 justify-between">
               <div className="item-center justify-center">
