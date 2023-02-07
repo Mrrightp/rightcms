@@ -72,10 +72,9 @@ export default function TopicCardComponent({ topic }: Props) {
 
         {topic.image ? (
           <div className="relative w-full h-[264px] mt-1">
-            <Image
+            <img
               src={topic.image?.url}
               alt=""
-              fill
               className="rounded-md object-cover absolute"
             />
           </div>
